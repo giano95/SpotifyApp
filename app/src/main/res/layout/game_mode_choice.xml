@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/mode1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mode_textView"
+        android:layout_centerHorizontal="true"
+        android:onClick="onNextPressed"
+        android:text="a tempo" />
+
+    <Button
+        android:id="@+id/mode2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mode1"
+        android:layout_centerHorizontal="true"
+        android:text="modalità 2"/>
+
+    <Button
+        android:id="@+id/mode3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mode2"
+        android:layout_centerHorizontal="true"
+        android:text="modalità 3"/>
+
+    <TextView
+        android:id="@+id/mode_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="scegli una modalità di gioco:" />
+</RelativeLayout>
