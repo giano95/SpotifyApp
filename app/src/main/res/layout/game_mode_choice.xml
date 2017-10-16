@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/mode1"
         android:layout_centerHorizontal="true"
-        android:text="modalità 2"/>
+        android:onClick="onNextPressed_1"
+        android:text="modalità di manu"/>
 
     <Button
         android:id="@+id/mode3"

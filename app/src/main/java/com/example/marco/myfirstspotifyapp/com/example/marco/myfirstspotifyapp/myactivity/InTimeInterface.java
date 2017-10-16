@@ -75,17 +75,17 @@ public class InTimeInterface extends ActivityInterface {
     }
 
     @Override
-    public int getNextId() {
+    public int getNextId(int mode) {
         return 0;
     }
 
     @Override
-    public ActivityInterface getNextInterface() {
+    public ActivityInterface getNextInterface(int mode) {
         return null;
     }
 
     @Override
-    public int getNextTransition() {
+    public int getNextTransition(int mode) {
         return 0;
     }
 

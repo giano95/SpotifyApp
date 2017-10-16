@@ -37,17 +37,17 @@ public class LoginInterface extends ActivityInterface {
     }
 
     @Override
-    public int getNextId() {
+    public int getNextId(int mode) {
         return R.layout.game_mode_choice;
     }
 
     @Override
-    public ActivityInterface getNextInterface() {
+    public ActivityInterface getNextInterface(int mode) {
         return new GameModeChoiceInterface(mActivity, mySpotify);
     }
 
     @Override
-    public int getNextTransition() {
+    public int getNextTransition(int mode) {
         return R.transition.transition_1;
     }
 

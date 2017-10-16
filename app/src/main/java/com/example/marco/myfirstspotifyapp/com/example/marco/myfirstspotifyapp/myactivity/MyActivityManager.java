@@ -35,12 +35,12 @@ public class MyActivityManager {
         current.update();
     }
 
-    public void next(){
-        Activitys.addLast(new MyActivity(current.getNextId(),
+    public void next(int mode){
+        Activitys.addLast(new MyActivity(current.getNextId(mode),
                 mRootContainer,
                 mActivity,
-                current.getNextActivityInterface(),
-                TransitionInflater.from(mActivity).inflateTransition(current.getNextTransition())));
+                current.getNextActivityInterface(mode),
+                TransitionInflater.from(mActivity).inflateTransition(current.getNextTransition(mode))));
 
         current = Activitys.getLast();
 

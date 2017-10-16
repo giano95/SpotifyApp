@@ -28,9 +28,9 @@ public abstract class ActivityInterface {
 // ABSTRACT METHODS
     public abstract void update();
     public abstract void onBackEvent();
-    public abstract int getNextId();
-    public abstract ActivityInterface getNextInterface();
-    public abstract int getNextTransition();
+    public abstract int getNextId(int mode);
+    public abstract ActivityInterface getNextInterface(int mode);
+    public abstract int getNextTransition(int mode);
 
 // OTHER METHODS
     public void initButtons() {

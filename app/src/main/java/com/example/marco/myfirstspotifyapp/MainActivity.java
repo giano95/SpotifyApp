@@ -64,7 +64,11 @@ public class MainActivity extends AppCompatActivity implements SpotifyPlayer.Not
     }
 
     public void onNextPressed(View view){
-        myActivityManager.next();
+        myActivityManager.next(0);
+    }
+
+    public void onNextPressed_1(View view){
+        myActivityManager.next(1);
     }
 
 

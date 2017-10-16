@@ -29,16 +29,16 @@ public class MyActivity {
         return mTransition;
     }
 
-    public int getNextId(){
-        return mActivityInterface.getNextId();
+    public int getNextId(int mode){
+        return mActivityInterface.getNextId(mode);
     }
 
-    public ActivityInterface getNextActivityInterface(){
-        return mActivityInterface.getNextInterface();
+    public ActivityInterface getNextActivityInterface(int mode){
+        return mActivityInterface.getNextInterface(mode);
     }
 
-    public int getNextTransition(){
-        return mActivityInterface.getNextTransition();
+    public int getNextTransition(int mode){
+        return mActivityInterface.getNextTransition(mode);
     }
 
     public void enter(){
