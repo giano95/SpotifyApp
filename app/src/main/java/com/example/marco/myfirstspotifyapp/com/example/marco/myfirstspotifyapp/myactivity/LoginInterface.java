@@ -22,10 +22,13 @@ public class LoginInterface extends ActivityInterface {
 
     @Override
     public void update() {
+
         boolean loggedIn = mySpotify.isLoggedIn();
 
         ((Button)views.get(R.id.login_button)).setText(loggedIn ? R.string.logout_button_label : R.string.login_button_label);
         ((Button)views.get(R.id.play_button)).setEnabled(loggedIn);
+
+        ((Button)views.get(R.id.login_button)).setOnClickListener(onLoginButton);
     }
 
     @Override
@@ -52,7 +55,6 @@ public class LoginInterface extends ActivityInterface {
     @Override
     public void initButtons() {
         super.initButtons();
-        ((Button)views.get(R.id.login_button)).setOnClickListener(onLoginButton);
     }
 
 

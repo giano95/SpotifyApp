@@ -98,9 +98,8 @@ public class MainActivity extends AppCompatActivity implements SpotifyPlayer.Not
     public void onPlaybackEvent(PlayerEvent event) {
         Util.logStatus("Playback event received: " + event.name());
         switch (event) {
-            // Handle event type as necessary
             case kSpPlaybackNotifyPlay:
-                break;
+                // Playback has started or has resumed
             case kSpPlaybackNotifyTrackChanged:
                 // The current track or its metadata has changed This event occurs when playback of a new/different track starts.
             case kSpPlaybackNotifyMetadataChanged:

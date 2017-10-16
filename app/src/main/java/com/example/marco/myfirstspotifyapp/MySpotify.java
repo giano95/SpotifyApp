@@ -28,17 +28,13 @@ import com.spotify.sdk.android.player.Metadata;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import java.util.Random;
-import java.util.Vector;
-
-
 
 public final class MySpotify{
 
 // CONSTANTS
     private static final int REQUEST_CODE = 1337;
-    private static final String CLIENT_ID = "089d841ccc194c10a77afad9e1c11d54";
-    private static final String REDIRECT_URI = "testschema://callback";
+    private static final String CLIENT_ID = "d94d1735c863475294f4f5d99bb63dd9";
+    private static final String REDIRECT_URI = "my-first-spotify-app://callback";
 
 
 // VARIABLES
@@ -48,15 +44,13 @@ public final class MySpotify{
     private Metadata mMetadata;
     private PlaybackState mCurrentPlaybackState;
     private BroadcastReceiver mNetworkStateReceiver;
-    Random randomGenerator;
+    private Playlist mPlaylist;
 
 
 // CONSTRUCTOR
     public MySpotify(Activity mActivity, Context mContext){
         this.mActivity = mActivity;
         this.mContext = mContext;
-
-        randomGenerator = new Random();
     }
 
 
@@ -194,7 +188,7 @@ public final class MySpotify{
     }
 
 
-// GETTER&SETTER METHODS
+// GETTER METHODS
     public String getCurrentTrackName(){
         if(mMetadata != null && mMetadata.currentTrack != null)
             return mMetadata.currentTrack.name;
@@ -244,9 +238,12 @@ public final class MySpotify{
 
 
 // OTHER METHODS
+    public void setPlaylist(String playlistUri, int playlistLength){
+        mPlaylist = new Playlist(playlistUri, playlistLength);
+    }
+
     public void playRandomSong(){
-        int randomInt = randomGenerator.nextInt(40);
-        mPlayer.playUri(mOperationCallback, "spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF", randomInt  , 0);
+        mPlayer.playUri(mOperationCallback, mPlaylist.getPlaylistUri(), mPlaylist.getRandomTrack(), 0);
     }
 
     public void skipToNext(){
@@ -266,7 +263,7 @@ public final class MySpotify{
     }
 
     public boolean isLoggedIn() {
-        return mPlayer != null && mPlayer.isLoggedIn();
+        return (mPlayer != null && mPlayer.isLoggedIn());
     }
 
     public void logout(){

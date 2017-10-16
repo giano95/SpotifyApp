@@ -1,6 +1,5 @@
 package com.example.marco.myfirstspotifyapp;
 
-
 import android.util.Log;
 
 public class Util {
