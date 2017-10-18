@@ -29,7 +29,7 @@
 
                 <data
                     android:host="callback"
-                    android:scheme="testschema"/>
+                    android:scheme="my-first-spotify-app"/>
             </intent-filter>
         </activity>
 

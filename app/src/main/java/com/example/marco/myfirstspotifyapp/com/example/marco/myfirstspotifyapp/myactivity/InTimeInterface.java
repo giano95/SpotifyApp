@@ -3,7 +3,6 @@ package com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.
 
 import android.app.Activity;
 import android.os.CountDownTimer;
-import android.transition.Transition;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.R;
+
 import java.util.Random;
 
 public class InTimeInterface extends ActivityInterface {
@@ -32,6 +32,7 @@ public class InTimeInterface extends ActivityInterface {
             @Override
             public void onFinish() {
                 ((TextView)views.get(R.id.chronometer)).setText("finito!");
+                notifyObserver(0);
             }
         };
         VIEWS_ID = new int[]{
@@ -52,7 +53,7 @@ public class InTimeInterface extends ActivityInterface {
             case 0: a = R.id.in_time_song1;  b = R.id.in_time_song2;    c = R.id.in_time_song3;  break;
             case 1: a = R.id.in_time_song3;  b = R.id.in_time_song1;    c = R.id.in_time_song2;  break;
             case 2: a = R.id.in_time_song2;  b = R.id.in_time_song3;    c = R.id.in_time_song1;  break;
-            default:    a=0;    b=0;    c=0;    break; // default case only for compiler error
+            default:    a=0;    b=0;    c=0;    break; // only for compiler error
         }
 
         mySpotify.getCoverArt((ImageView) views.get(R.id.cover_art));
@@ -72,29 +73,15 @@ public class InTimeInterface extends ActivityInterface {
     @Override
     public void onBackEvent() {
         mySpotify.pause();
-    }
-
-    @Override
-    public int getNextId(int mode) {
-        return 0;
-    }
-
-    @Override
-    public ActivityInterface getNextInterface(int mode) {
-        return null;
-    }
-
-    @Override
-    public int getNextTransition(int mode) {
-        return 0;
+        mTimer.cancel();
     }
 
     @Override
     public void initButtons() {
         super.initButtons();
         mySpotify.setPlaylist("spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF", 50);
-        mySpotify.playRandomSong();
         mTimer.start();
+        mySpotify.playRandomSong();
     }
 
 

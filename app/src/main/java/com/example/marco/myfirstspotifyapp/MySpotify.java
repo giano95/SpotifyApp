@@ -20,7 +20,6 @@ import com.spotify.sdk.android.player.Connectivity;
 import com.spotify.sdk.android.player.Error;
 import com.spotify.sdk.android.player.PlaybackState;
 import com.spotify.sdk.android.player.Player;
-import com.spotify.sdk.android.player.PlayerEvent;
 import com.spotify.sdk.android.player.Spotify;
 import com.spotify.sdk.android.player.SpotifyPlayer;
 import com.spotify.sdk.android.player.Metadata;
@@ -124,8 +123,6 @@ public final class MySpotify{
                     mPlayer.setConnectivityStatus(mOperationCallback, getNetworkConnectivity(mContext));
                     mPlayer.addNotificationCallback((Player.NotificationCallback) mContext);
                     mPlayer.addConnectionStateCallback((ConnectionStateCallback) mContext);
-                    // Trigger UI refresh
-                    // todo: updateLoginView();
                 }
 
                 @Override
@@ -237,7 +234,7 @@ public final class MySpotify{
     }
 
 
-// OTHER METHODS
+// USEFUL METHODS
     public void setPlaylist(String playlistUri, int playlistLength){
         mPlaylist = new Playlist(playlistUri, playlistLength);
     }

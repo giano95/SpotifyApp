@@ -9,36 +9,22 @@ import android.view.ViewGroup;
 public class MyActivity {
 
 // VARIABLES
-    Scene mScene;
-    ActivityInterface mActivityInterface;
-    Transition mTransition;
+    private Scene mScene;
+    private ActivityInterface mActivityInterface;
 
 
-    // CONSTRUCTOR
-    public MyActivity(int ID, ViewGroup lRootContainer, Activity lActivity, ActivityInterface lActivityInterface, Transition lTransition) {
+// CONSTRUCTOR
+    public MyActivity(int ID, ActivityInterface lActivityInterface, ViewGroup lRootContainer, Activity lActivity) {
         mScene = Scene.getSceneForLayout(lRootContainer, ID, lActivity);
         this.mActivityInterface = lActivityInterface;
-        this.mTransition = lTransition;
     }
 
     public Scene getScene() {
         return mScene;
     }
 
-    public Transition getTransition() {
-        return mTransition;
-    }
-
-    public int getNextId(int mode){
-        return mActivityInterface.getNextId(mode);
-    }
-
-    public ActivityInterface getNextActivityInterface(int mode){
-        return mActivityInterface.getNextInterface(mode);
-    }
-
-    public int getNextTransition(int mode){
-        return mActivityInterface.getNextTransition(mode);
+    public void registerObserver(Observer observer){
+        mActivityInterface.registerObserver(observer);
     }
 
     public void enter(){

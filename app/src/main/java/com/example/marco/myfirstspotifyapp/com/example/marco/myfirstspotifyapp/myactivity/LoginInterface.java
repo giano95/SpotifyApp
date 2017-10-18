@@ -2,7 +2,6 @@ package com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.
 
 
 import android.app.Activity;
-import android.transition.Transition;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,7 +9,7 @@ import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.Util;
 import com.example.marco.myfirstspotifyapp.R;
 
-public class LoginInterface extends ActivityInterface {
+public class LoginInterface extends ActivityInterface implements Observable{
 
     public LoginInterface(Activity mActivity, MySpotify mySpotify){
         super(mActivity,mySpotify);
@@ -27,8 +26,6 @@ public class LoginInterface extends ActivityInterface {
 
         ((Button)views.get(R.id.login_button)).setText(loggedIn ? R.string.logout_button_label : R.string.login_button_label);
         ((Button)views.get(R.id.play_button)).setEnabled(loggedIn);
-
-        ((Button)views.get(R.id.login_button)).setOnClickListener(onLoginButton);
     }
 
     @Override
@@ -37,28 +34,14 @@ public class LoginInterface extends ActivityInterface {
     }
 
     @Override
-    public int getNextId(int mode) {
-        return R.layout.game_mode_choice;
-    }
-
-    @Override
-    public ActivityInterface getNextInterface(int mode) {
-        return new GameModeChoiceInterface(mActivity, mySpotify);
-    }
-
-    @Override
-    public int getNextTransition(int mode) {
-        return R.transition.transition_1;
-    }
-
-
-    @Override
     public void initButtons() {
         super.initButtons();
+        ((Button)views.get(R.id.login_button)).setOnClickListener(onLoginButtonClicked);
+        ((Button)views.get(R.id.play_button)).setOnClickListener(onPlayButtonClicked);
     }
 
 
-    View.OnClickListener onLoginButton = new View.OnClickListener() {
+    View.OnClickListener onLoginButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (!mySpotify.isLoggedIn()) {
@@ -67,6 +50,15 @@ public class LoginInterface extends ActivityInterface {
             } else {
                 mySpotify.logout();
             }
+        }
+    };
+
+    View.OnClickListener onPlayButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            mNextId = R.layout.game_mode_choice;
+            mNextActivityInterface = new GameModeChoiceInterface(mActivity, mySpotify);
+            notifyObserver(1);
         }
     };
 }
