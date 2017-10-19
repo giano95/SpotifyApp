@@ -3,20 +3,21 @@ package com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.
 
 import android.app.Activity;
 import android.transition.Scene;
-import android.transition.Transition;
 import android.view.ViewGroup;
+
+import java.io.Serializable;
 
 public class MyActivity {
 
 // VARIABLES
     private Scene mScene;
-    private ActivityInterface mActivityInterface;
+    private AbstractActivityUI mAbstractActivityUI;
 
 
 // CONSTRUCTOR
-    public MyActivity(int ID, ActivityInterface lActivityInterface, ViewGroup lRootContainer, Activity lActivity) {
-        mScene = Scene.getSceneForLayout(lRootContainer, ID, lActivity);
-        this.mActivityInterface = lActivityInterface;
+    public MyActivity(int layoutID, AbstractActivityUI abstractActivityUI, ViewGroup rootContainer, Activity activity) {
+        this.mScene = Scene.getSceneForLayout(rootContainer, layoutID, activity);
+        this.mAbstractActivityUI = abstractActivityUI;
     }
 
     public Scene getScene() {
@@ -24,7 +25,7 @@ public class MyActivity {
     }
 
     public void registerObserver(Observer observer){
-        mActivityInterface.registerObserver(observer);
+        mAbstractActivityUI.registerObserver(observer);
     }
 
     public void enter(){
@@ -32,14 +33,14 @@ public class MyActivity {
     }
 
     public void update(){
-        mActivityInterface.update();
+        mAbstractActivityUI.update();
     }
 
-    public void initButtons(){
-        mActivityInterface.initButtons();
+    public void onCreate(){
+        mAbstractActivityUI.onCreate();
     }
 
-    public void onBackEvent(){
-        mActivityInterface.onBackEvent();
+    public void onDestroy(){
+        mAbstractActivityUI.onDestroy();
     }
 }

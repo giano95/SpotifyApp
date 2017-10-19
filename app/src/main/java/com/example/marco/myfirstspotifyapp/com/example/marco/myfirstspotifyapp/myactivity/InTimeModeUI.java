@@ -13,35 +13,36 @@ import com.example.marco.myfirstspotifyapp.R;
 
 import java.util.Random;
 
-public class InTimeInterface extends ActivityInterface {
+public class InTimeModeUI extends AbstractActivityUI {
 
     private Random mRandomGenerator;
     private Integer mScore;
     private CountDownTimer mTimer;
 
-    public InTimeInterface(Activity mActivity, MySpotify mySpotify){
+    public InTimeModeUI(Activity mActivity, MySpotify mySpotify){
         super(mActivity,mySpotify);
-        mRandomGenerator = new Random();
-        mScore = 0;
-        mTimer = new CountDownTimer(45000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                ((TextView)views.get(R.id.chronometer)).setText("" + millisUntilFinished / 1000);
-            }
-
-            @Override
-            public void onFinish() {
-                ((TextView)views.get(R.id.chronometer)).setText("finito!");
-                notifyObserver(0);
-            }
-        };
-        VIEWS_ID = new int[]{
+        super.mViewsId = new int[]{
                 R.id.in_time_song1,
                 R.id.in_time_song2,
                 R.id.in_time_song3,
                 R.id.score_text_view,
                 R.id.chronometer,
                 R.id.cover_art,
+        };
+
+        this.mRandomGenerator = new Random();
+        this.mScore = 0;
+        this.mTimer = new CountDownTimer(45000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                ((TextView)mViews.get(R.id.chronometer)).setText("" + millisUntilFinished / 1000);
+            }
+
+            @Override
+            public void onFinish() {
+                ((TextView)mViews.get(R.id.chronometer)).setText("finito!");
+                notifyObserver(0);
+            }
         };
     }
 
@@ -56,30 +57,30 @@ public class InTimeInterface extends ActivityInterface {
             default:    a=0;    b=0;    c=0;    break; // only for compiler error
         }
 
-        mySpotify.getCoverArt((ImageView) views.get(R.id.cover_art));
+        mySpotify.getCoverArt((ImageView) mViews.get(R.id.cover_art));
 
-        ((Button)views.get(a)).setText(mySpotify.getCurrentTrackName());
-        ((Button)views.get(b)).setText(mySpotify.getNextTrackName());
-        ((Button)views.get(c)).setText(mySpotify.getPrevTrackName());
+        ((Button)mViews.get(a)).setText(mySpotify.getCurrentTrackName());
+        ((Button)mViews.get(b)).setText(mySpotify.getNextTrackName());
+        ((Button)mViews.get(c)).setText(mySpotify.getPrevTrackName());
 
 
-        ((TextView)views.get(R.id.score_text_view)).setText("Punteggio: " + mScore);
+        ((TextView)mViews.get(R.id.score_text_view)).setText("Punteggio: " + mScore);
 
-        ((Button)views.get(a)).setOnClickListener(RightSong);
-        ((Button)views.get(b)).setOnClickListener(WrongSong);
-        ((Button)views.get(c)).setOnClickListener(WrongSong);
+        ((Button)mViews.get(a)).setOnClickListener(RightSong);
+        ((Button)mViews.get(b)).setOnClickListener(WrongSong);
+        ((Button)mViews.get(c)).setOnClickListener(WrongSong);
     }
 
     @Override
-    public void onBackEvent() {
+    public void onDestroy() {
         mySpotify.pause();
         mTimer.cancel();
     }
 
     @Override
-    public void initButtons() {
-        super.initButtons();
-        mySpotify.setPlaylist("spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF", 50);
+    public void onCreate() {
+        super.initViews();
+        // mySpotify.setPlaylist("spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF", 50);
         mTimer.start();
         mySpotify.playRandomSong();
     }

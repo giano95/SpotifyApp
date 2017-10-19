@@ -207,6 +207,14 @@ public final class MySpotify{
             return "no_name_found";
     }
 
+    public String getCurrentTrackArtist(){
+        if(mMetadata != null && mMetadata.currentTrack != null)
+            return mMetadata.currentTrack.artistName;
+        else
+            return "no_artist_found";
+
+    }
+
     public void getCoverArt(ImageView coverArtView){
         if (mMetadata != null && mMetadata.currentTrack != null) {
 
@@ -237,6 +245,10 @@ public final class MySpotify{
 // USEFUL METHODS
     public void setPlaylist(String playlistUri, int playlistLength){
         mPlaylist = new Playlist(playlistUri, playlistLength);
+    }
+
+    public void setPlaylist(Playlist playlist){
+        mPlaylist = playlist;
     }
 
     public void playRandomSong(){

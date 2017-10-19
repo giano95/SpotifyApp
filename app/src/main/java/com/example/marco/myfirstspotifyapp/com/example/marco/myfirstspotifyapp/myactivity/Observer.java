@@ -3,5 +3,5 @@ package com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.
 
 public interface Observer {
     public void onEventListener();
-    public void onNextActivityListener(int nextId, ActivityInterface nextActivityInterface);
+    public void onNextActivityListener(int nextId, AbstractActivityUI nextAbstractActivityUI);
 }

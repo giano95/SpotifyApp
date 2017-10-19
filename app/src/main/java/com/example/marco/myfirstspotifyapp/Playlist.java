@@ -4,16 +4,16 @@ import java.util.Random;
 
 public class Playlist {
 
-    private String playlistUri;
+    private String mPlaylistUri;
     private int playlistLength;
     private boolean[] trackFlag;
-    Random randomGenerator;
+    private Random randomGenerator;
 
     public Playlist(String playlistUri, int playlistLength){
-        this.playlistUri = playlistUri;
+        this.mPlaylistUri = playlistUri;
         this.playlistLength = playlistLength;
-        trackFlag = new boolean[playlistLength];
-        randomGenerator = new Random();
+        this.trackFlag = new boolean[playlistLength];
+        this.randomGenerator = new Random();
 
         // initialize track flag (all false because no song has been played yet)
         for(int i = 0; i < playlistLength; i++){
@@ -22,7 +22,7 @@ public class Playlist {
     }
 
     public String getPlaylistUri(){
-        return playlistUri;
+        return mPlaylistUri;
     }
 
     public int getRandomTrack(){
@@ -30,7 +30,7 @@ public class Playlist {
         int randomInt = randomGenerator.nextInt(playlistLength);
 
         // as long as the selected track has already been played we take another track
-        while(trackFlag[randomInt] == true){
+        while(trackFlag[randomInt] == true || randomInt == 0 || randomInt == playlistLength - 1){
             randomInt = randomGenerator.nextInt(playlistLength);
         }
 

@@ -9,11 +9,13 @@ import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.Util;
 import com.example.marco.myfirstspotifyapp.R;
 
-public class LoginInterface extends ActivityInterface implements Observable{
+public class LoginUI extends AbstractActivityUI implements Observable{
 
-    public LoginInterface(Activity mActivity, MySpotify mySpotify){
+    private boolean mLoggedIn;
+
+    public LoginUI(Activity mActivity, MySpotify mySpotify){
         super(mActivity,mySpotify);
-        VIEWS_ID = new int[]{
+        super.mViewsId = new int[]{
                 R.id.login_button,
                 R.id.play_button,
         };
@@ -22,22 +24,23 @@ public class LoginInterface extends ActivityInterface implements Observable{
     @Override
     public void update() {
 
-        boolean loggedIn = mySpotify.isLoggedIn();
+        mLoggedIn = mySpotify.isLoggedIn();
 
-        ((Button)views.get(R.id.login_button)).setText(loggedIn ? R.string.logout_button_label : R.string.login_button_label);
-        ((Button)views.get(R.id.play_button)).setEnabled(loggedIn);
+        ((Button)mViews.get(R.id.login_button)).setText(mLoggedIn ? R.string.logout_button_label : R.string.login_button_label);
+        ((Button)mViews.get(R.id.play_button)).setEnabled(mLoggedIn);
     }
 
     @Override
-    public void onBackEvent() {
+    public void onDestroy() {
 
     }
 
     @Override
-    public void initButtons() {
-        super.initButtons();
-        ((Button)views.get(R.id.login_button)).setOnClickListener(onLoginButtonClicked);
-        ((Button)views.get(R.id.play_button)).setOnClickListener(onPlayButtonClicked);
+    public void onCreate() {
+        super.initViews();
+
+        ((Button)mViews.get(R.id.login_button)).setOnClickListener(onLoginButtonClicked);
+        ((Button)mViews.get(R.id.play_button)).setOnClickListener(onPlayButtonClicked);
     }
 
 
@@ -56,8 +59,8 @@ public class LoginInterface extends ActivityInterface implements Observable{
     View.OnClickListener onPlayButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mNextId = R.layout.game_mode_choice;
-            mNextActivityInterface = new GameModeChoiceInterface(mActivity, mySpotify);
+            mNextID = R.layout.game_mode_choice;
+            mNextAbstractActivityUI = new GameModeChoiceUI(mActivity, mySpotify);
             notifyObserver(1);
         }
     };
