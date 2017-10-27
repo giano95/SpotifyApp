@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="scegli una modalità di gioco:" />
+        android:text="scegli la modalità di gioco:" />
 
     <Button
         android:id="@+id/mode1"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/mode_textView"
         android:layout_centerHorizontal="true"
-        android:text="a tempo" />
+        android:text="indovina il nome" />
 
     <Button
         android:id="@+id/mode2"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/mode1"
         android:layout_centerHorizontal="true"
-        android:text="modalità di manu"/>
+        android:text="trova l'artista"/>
 
     <Button
         android:id="@+id/mode3"

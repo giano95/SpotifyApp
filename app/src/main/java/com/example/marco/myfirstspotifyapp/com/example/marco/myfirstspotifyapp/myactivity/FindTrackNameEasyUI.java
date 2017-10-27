@@ -3,24 +3,29 @@ package com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.
 
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.transition.Scene;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.marco.myfirstspotifyapp.Event;
 import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.R;
 
 import java.util.Random;
 
-public class InTimeModeUI extends AbstractActivityUI {
+public class FindTrackNameEasyUI extends AbstractActivityUI {
 
     private Random mRandomGenerator;
     private Integer mScore;
     private CountDownTimer mTimer;
 
-    public InTimeModeUI(Activity mActivity, MySpotify mySpotify){
-        super(mActivity,mySpotify);
+    public FindTrackNameEasyUI(Activity mActivity, MySpotify mySpotify, ViewGroup rootContainer){
+        super(mActivity,mySpotify,rootContainer);
+        super.mScene = Scene.getSceneForLayout(mRootContainer, R.layout.in_time_mode, mActivity);
         super.mViewsId = new int[]{
                 R.id.in_time_song1,
                 R.id.in_time_song2,
@@ -41,7 +46,7 @@ public class InTimeModeUI extends AbstractActivityUI {
             @Override
             public void onFinish() {
                 ((TextView)mViews.get(R.id.chronometer)).setText("finito!");
-                notifyObserver(0);
+                notifyObserver(Event.EndOfGame);
             }
         };
     }
@@ -80,7 +85,6 @@ public class InTimeModeUI extends AbstractActivityUI {
     @Override
     public void onCreate() {
         super.initViews();
-        // mySpotify.setPlaylist("spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF", 50);
         mTimer.start();
         mySpotify.playRandomSong();
     }
@@ -90,6 +94,8 @@ public class InTimeModeUI extends AbstractActivityUI {
         @Override
         public void onClick(View view) {
             mScore += 10;
+            Toast toast = Toast.makeText(mActivity.getApplicationContext(), "+10!", Toast.LENGTH_SHORT);
+            toast.show();
             mySpotify.playRandomSong();
         }
     };

@@ -212,7 +212,20 @@ public final class MySpotify{
             return mMetadata.currentTrack.artistName;
         else
             return "no_artist_found";
+    }
 
+    public String getNextTrackArtist(){
+        if(mMetadata != null && mMetadata.nextTrack != null)
+            return mMetadata.nextTrack.artistName;
+        else
+            return "no_name_found";
+    }
+
+    public String getPrevTrackArtist(){
+        if(mMetadata != null && mMetadata.prevTrack != null)
+            return mMetadata.prevTrack.artistName;
+        else
+            return "no_name_found";
     }
 
     public void getCoverArt(ImageView coverArtView){

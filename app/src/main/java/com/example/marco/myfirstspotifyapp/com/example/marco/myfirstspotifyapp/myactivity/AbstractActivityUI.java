@@ -1,11 +1,16 @@
 package com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity;
 
 import android.app.Activity;
+import android.transition.Scene;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.EditText;
+
+import com.example.marco.myfirstspotifyapp.ActivityType;
+import com.example.marco.myfirstspotifyapp.Event;
 import com.example.marco.myfirstspotifyapp.MySpotify;
 
 import java.util.ArrayList;
@@ -15,6 +20,8 @@ public abstract class AbstractActivityUI implements Observable{
 
 
 // VARIABLES
+    protected Scene mScene;
+    protected ViewGroup mRootContainer;
     protected int mNextID;
     protected int[] mViewsId;
     protected Activity mActivity;
@@ -22,11 +29,13 @@ public abstract class AbstractActivityUI implements Observable{
     protected HashMap<Integer, View> mViews;
     protected ArrayList<Observer> mObservers;
     protected AbstractActivityUI mNextAbstractActivityUI;
+    protected ActivityType mActivityType;
 
 // CONSTRUCTOR
-    public AbstractActivityUI(Activity activity, MySpotify mySpotify){
+    public AbstractActivityUI(Activity activity, MySpotify mySpotify, ViewGroup rootContainer){
         this.mActivity = activity;
         this.mySpotify = mySpotify;
+        this.mRootContainer = rootContainer;
         this.mViews = new HashMap<Integer, View>();
         this.mObservers = new ArrayList<Observer>();
     }
@@ -55,8 +64,16 @@ public abstract class AbstractActivityUI implements Observable{
         }
     }
 
+    public Scene getScene() {
+        return mScene;
+    }
 
-// OBSERVER METHODS FOR THE CHILD LISTENING
+    public void enter(){
+        mScene.enter();
+    }
+
+
+    // OBSERVER METHODS
     @Override
     public void registerObserver(Observer observer) {
         mObservers.add(observer);
@@ -69,20 +86,10 @@ public abstract class AbstractActivityUI implements Observable{
     }
 
     @Override
-    public void notifyObserver(int event) {
-        switch(event){
-            case 0:
-                for(Observer observer: mObservers){
-                    observer.onEventListener();
-                }
-                break;
-            case 1:
-                for(Observer observer: mObservers){
-                    observer.onNextActivityListener(mNextID, mNextAbstractActivityUI);
-                }
-                break;
-            default:
-                break;
+    public void notifyObserver(Event event) {
+
+        for(Observer observer: mObservers){
+            observer.onEventListener(mActivityType, mySpotify, event);
         }
     }
 }

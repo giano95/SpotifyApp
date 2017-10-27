@@ -2,9 +2,13 @@ package com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.
 
 
 import android.app.Activity;
+import android.transition.Scene;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.marco.myfirstspotifyapp.ActivityType;
+import com.example.marco.myfirstspotifyapp.Event;
 import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.Util;
 import com.example.marco.myfirstspotifyapp.R;
@@ -13,8 +17,9 @@ public class LoginUI extends AbstractActivityUI implements Observable{
 
     private boolean mLoggedIn;
 
-    public LoginUI(Activity mActivity, MySpotify mySpotify){
-        super(mActivity,mySpotify);
+    public LoginUI(Activity activity, MySpotify mySpotify, ViewGroup rootContainer){
+        super(activity,mySpotify,rootContainer);
+        super.mScene = Scene.getSceneForLayout(mRootContainer, R.layout.login, mActivity);
         super.mViewsId = new int[]{
                 R.id.login_button,
                 R.id.play_button,
@@ -59,9 +64,9 @@ public class LoginUI extends AbstractActivityUI implements Observable{
     View.OnClickListener onPlayButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mNextID = R.layout.game_mode_choice;
-            mNextAbstractActivityUI = new GameModeChoiceUI(mActivity, mySpotify);
-            notifyObserver(1);
+
+            mActivityType = ActivityType.GameModeChoiceUI;
+            notifyObserver(Event.NextActivity);
         }
     };
 }

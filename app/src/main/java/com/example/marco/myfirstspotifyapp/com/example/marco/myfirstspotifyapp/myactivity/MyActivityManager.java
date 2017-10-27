@@ -7,6 +7,9 @@ import android.transition.TransitionManager;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.marco.myfirstspotifyapp.ActivityFactory;
+import com.example.marco.myfirstspotifyapp.ActivityType;
+import com.example.marco.myfirstspotifyapp.Event;
 import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.R;
 import java.util.ArrayDeque;
@@ -14,11 +17,12 @@ import java.util.ArrayDeque;
 public class MyActivityManager implements Observer{
 
 // VARIABLES    
-    private ViewGroup mRootContainer;               // container of all the scene of the various activities
-    private Activity mActivity;                     // android  main activity
-    private Transition mTransition;                 // transitions used to switch from one scene to another
-    private MyActivity mRunningActivity;            // the running activity
-    private ArrayDeque<MyActivity> mActivities;     // stack of activities managed under LIFO protocol
+    private ViewGroup mRootContainer;                       // container of all the scene of the various activities
+    private Activity mActivity;                             // android  main activity
+    private Transition mTransition;                         // transitions used to switch from one scene to another
+    private AbstractActivityUI mRunningActivity;            // the running activity
+    private ArrayDeque<AbstractActivityUI> mActivities;     // stack of activities managed under LIFO protocol
+    private ActivityFactory mFactory;
 
     
 // CONSTRUCTOR    
@@ -26,8 +30,9 @@ public class MyActivityManager implements Observer{
 
         this.mRootContainer = rootContainer;
         this.mActivity = activity;
-        this.mActivities = new ArrayDeque<MyActivity>();
+        this.mActivities = new ArrayDeque<AbstractActivityUI>();
         this.mTransition = TransitionInflater.from(mActivity).inflateTransition(R.transition.transition_1);
+        this.mFactory = new ActivityFactory();
     }
 
 
@@ -35,11 +40,8 @@ public class MyActivityManager implements Observer{
     public void start(MySpotify mySpotify){
 
         // we push the login activity to the stack
-        mActivities.addLast(new MyActivity(
-                R.layout.login,
-                new LoginUI(mActivity, mySpotify),
-                mRootContainer,
-                mActivity));
+        //mActivities.addLast(new LoginUI(mActivity, mySpotify, mRootContainer));
+        mActivities.addLast(mFactory.create(ActivityType.LoginUI, mActivity, mySpotify, mRootContainer));
 
         // we set the activity we just added as the current one
         mRunningActivity = mActivities.getLast();
@@ -57,14 +59,7 @@ public class MyActivityManager implements Observer{
 
 
 // METHOD USED TO MOVE TO THE NEXT ACTIVITY
-    private void next(int nextId, AbstractActivityUI nextAbstractActivityUI){
-
-        // we push the next activity to the stack
-        mActivities.addLast(new MyActivity(
-                nextId,
-                nextAbstractActivityUI,
-                mRootContainer,
-                mActivity));
+    private void next(){
 
         // we set the activity we just added as the current one
         mRunningActivity = mActivities.getLast();
@@ -119,13 +114,18 @@ public class MyActivityManager implements Observer{
 
     // LISTENER METHODS
     @Override
-    public void onEventListener() {
-        Toast toast = Toast.makeText(mActivity.getApplicationContext(), "ehi zio guarda come ti implemento il pattern Observer", Toast.LENGTH_SHORT);
-        toast.show();
-    }
+    public void onEventListener(ActivityType activityType, MySpotify mySpotify, Event event) {
 
-    @Override
-    public void onNextActivityListener(int nextId, AbstractActivityUI nextAbstractActivityUI) {
-        next(nextId, nextAbstractActivityUI);
+        switch(event){
+            case EndOfGame:
+                Toast toast = Toast.makeText(mActivity.getApplicationContext(), "ehi zio guarda come ti implemento il pattern Observer", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case NextActivity:
+                // we push the next activity to the stack
+                mActivities.addLast(mFactory.create(activityType, mActivity, mySpotify, mRootContainer));
+                next();
+                break;
+        }
     }
 }
