@@ -31,7 +31,7 @@ public class LoginUI extends AbstractActivityUI implements Observable{
 
         mLoggedIn = mySpotify.isLoggedIn();
 
-        ((Button)mViews.get(R.id.login_button)).setText(mLoggedIn ? R.string.logout_button_label : R.string.login_button_label);
+        ((Button)mViews.get(R.id.login_button)).setText(mLoggedIn ? R.string.logout_button : R.string.login_button);
         ((Button)mViews.get(R.id.play_button)).setEnabled(mLoggedIn);
     }
 

@@ -8,12 +8,12 @@
     android:paddingTop="@dimen/in_time_vertical_margin">
 
     <TextView
-        android:id="@+id/mode_textView"
+        android:id="@+id/playlist_choice_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="scegli il genere"
+        android:text="@string/playlist_choice_textview"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -22,7 +22,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/mode_textView">
+        android:layout_below="@id/playlist_choice_textview">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,84 +30,77 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/playlist_1"
-                android:text="commerciale"
+                android:id="@+id/playlist_1_button"
+                android:text="@string/playlist_1_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
             <Button
-                android:id="@+id/playlist_2"
-                android:text="anni 90 italiane"
+                android:id="@+id/playlist_2_button"
+                android:text="@string/playlist_2_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
             <Button
-                android:id="@+id/playlist_3"
-                android:text="indie"
+                android:id="@+id/playlist_3_button"
+                android:text="@string/playlist_3_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"/>
 
             <Button
-                android:id="@+id/playlist_4"
-                android:text="pop"
+                android:id="@+id/playlist_4_button"
+                android:text="@string/playlist_4_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"/>
 
             <Button
-                android:id="@+id/playlist_5"
-                android:text="rock"
+                android:id="@+id/playlist_5_button"
+                android:text="@string/playlist_5_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"/>
 
             <Button
-                android:id="@+id/playlist_6"
+                android:id="@+id/playlist_6_button"
+                android:text="@string/playlist_6_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:text="metal" />
+                android:layout_centerHorizontal="true" />
 
             <Button
-                android:id="@+id/playlist_7"
-                android:text="rap italiano"
+                android:id="@+id/playlist_7_button"
+                android:text="@string/playlist_7_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"/>
 
             <Button
-                android:id="@+id/playlist_8"
-                android:text="dance"
+                android:id="@+id/playlist_8_button"
+                android:text="@string/playlist_8_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"/>
 
             <Button
-                android:id="@+id/playlist_9"
-                android:text="jazz"
+                android:id="@+id/playlist_9_button"
+                android:text="@string/playlist_9_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"/>
 
-            <Button
-                android:id="@+id/playlist_10"
-                android:text="romantica"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"/>
 
         </LinearLayout>
 

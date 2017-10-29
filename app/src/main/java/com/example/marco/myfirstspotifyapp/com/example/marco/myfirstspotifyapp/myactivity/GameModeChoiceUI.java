@@ -18,10 +18,9 @@ public class GameModeChoiceUI extends AbstractActivityUI {
         super(mActivity,mySpotify,rootContainer);
         super.mScene = Scene.getSceneForLayout(mRootContainer, R.layout.game_mode_choice, mActivity);
         super.mViewsId = new int[]{
-                R.id.mode1,
-                R.id.mode2,
-                R.id.mode3,
-                R.id.mode_textView,
+                R.id.game_mode_choice_textview,
+                R.id.find_track_name_button,
+                R.id.find_artist_name_button,
         };
     }
 
@@ -38,25 +37,23 @@ public class GameModeChoiceUI extends AbstractActivityUI {
     @Override
     public void onCreate() {
         super.initViews();
-        ((Button)mViews.get(R.id.mode1)).setOnClickListener(onInTimeButtonClicked);
-        ((Button)mViews.get(R.id.mode2)).setOnClickListener(onFindArtistButtonClicked);
+        ((Button)mViews.get(R.id.find_track_name_button)).setOnClickListener(onFindTrackNameButtonClicked);
+        ((Button)mViews.get(R.id.find_artist_name_button)).setOnClickListener(onFindArtistNameButtonClicked);
     }
 
-    View.OnClickListener onInTimeButtonClicked = new View.OnClickListener() {
+    View.OnClickListener onFindTrackNameButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //mNextID = R.layout.playlist_choice;
-            //mNextAbstractActivityUI = new InTimeModeUI(mActivity, mySpotify, mRootContainer);
+
             mActivityType = ActivityType.findTrackName;
             notifyObserver(Event.NextActivity);
         }
     };
 
-    View.OnClickListener onFindArtistButtonClicked = new View.OnClickListener() {
+    View.OnClickListener onFindArtistNameButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //mNextID = R.layout.find_artist;
-            // mNextAbstractActivityUI = new FindArtistUI(mActivity, mySpotify, mRootContainer);
+
             mActivityType = ActivityType.findArtistName;
             notifyObserver(Event.NextActivity);
         }

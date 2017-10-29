@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.AbstractActivityUI;
 import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.DifficultyChoiceUI;
 import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.FindArtistNameEasyUI;
+import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.FindArtistNameHardUI;
 import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.FindTrackNameHardUI;
 import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.GameModeChoiceUI;
 import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.FindTrackNameEasyUI;
@@ -45,7 +46,7 @@ public class ActivityFactory {
                     case findArtistName:
                         switch(difficulty){
                             case easy:      return new FindArtistNameEasyUI(activity, mySpotify, rootContainer);
-                            case hard:      break;
+                            case hard:      return new FindArtistNameHardUI(activity, mySpotify, rootContainer);
                         }
                 }
             default:

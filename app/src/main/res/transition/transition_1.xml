@@ -9,15 +9,6 @@
                 <targets>
                         <target	android:targetId="@id/login_button" />
                         <target	android:targetId="@id/play_button" />
-                        <target	android:targetId="@id/mode1" />
-                        <target	android:targetId="@id/mode2" />
-                        <target	android:targetId="@id/mode3" />
-                        <target	android:targetId="@id/mode_textView" />
-                        <target	android:targetId="@id/in_time_song1" />
-                        <target	android:targetId="@id/in_time_song2" />
-                        <target	android:targetId="@id/in_time_song3" />
-                        <target	android:targetId="@id/score_text_view" />
-                        <target	android:targetId="@id/chronometer" />
                 </targets>
         </fade>
 

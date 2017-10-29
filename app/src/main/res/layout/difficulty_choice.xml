@@ -4,34 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/in_time_level1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="facile"
-        android:layout_below="@+id/in_time_texview_choice"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="92dp" />
-
-    <Button
-        android:id="@+id/in_time_level2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/in_time_level1"
-        android:layout_marginBottom="146dp"
-        android:text="difficile" />
-
     <TextView
-        android:id="@+id/in_time_texview_choice"
+        android:id="@+id/difficulty_choice_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="47dp"
-        android:text="Scegli la difficoltà"
+        android:text="@string/difficulty_choice_textview"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/easy_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/easy_button"
+        android:layout_below="@+id/difficulty_choice_textview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="92dp" />
+
+    <Button
+        android:id="@+id/hard_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/easy_button"
+        android:layout_marginBottom="146dp"
+        android:text="@string/hard_button" />
 
 </RelativeLayout>

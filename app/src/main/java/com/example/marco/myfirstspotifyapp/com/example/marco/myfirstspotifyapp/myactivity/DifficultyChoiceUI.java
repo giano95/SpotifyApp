@@ -17,9 +17,9 @@ public class DifficultyChoiceUI extends AbstractActivityUI {
         super(mActivity,mySpotify,rootContainer);
         super.mScene = Scene.getSceneForLayout(mRootContainer, R.layout.difficulty_choice, mActivity);
         super.mViewsId = new int[]{
-                R.id.in_time_level1,
-                R.id.in_time_level2,
-                R.id.in_time_texview_choice,
+                R.id.difficulty_choice_textview,
+                R.id.easy_button,
+                R.id.hard_button,
         };
     }
     @Override
@@ -31,8 +31,8 @@ public class DifficultyChoiceUI extends AbstractActivityUI {
     public void onCreate() {
 
         super.initViews();
-        ((Button)mViews.get(R.id.in_time_level1)).setOnClickListener(onEasyButtonClicked);
-        ((Button)mViews.get(R.id.in_time_level2)).setOnClickListener(onHardButtonClicked);
+        ((Button)mViews.get(R.id.easy_button)).setOnClickListener(onEasyButtonClicked);
+        ((Button)mViews.get(R.id.hard_button)).setOnClickListener(onHardButtonClicked);
 
     }
 

@@ -4,12 +4,12 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/cover_art"
+        android:id="@+id/coverart_imageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:scaleType="centerCrop"/>
 
-    <include layout="@layout/in_time_buttons"/>
+    <include layout="@layout/easy_mode_buttons"/>
 
 </RelativeLayout>

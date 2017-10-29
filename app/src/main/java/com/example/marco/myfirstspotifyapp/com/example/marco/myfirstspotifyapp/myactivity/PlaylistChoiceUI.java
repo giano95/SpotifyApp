@@ -17,16 +17,16 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
         super(activity, mySpotify, rootContainer);
         super.mScene = Scene.getSceneForLayout(mRootContainer, R.layout.playlist_choice, mActivity);
         super.mViewsId = new int[]{
-                R.id.playlist_1,
-                R.id.playlist_2,
-                R.id.playlist_3,
-                R.id.playlist_4,
-                R.id.playlist_5,
-                R.id.playlist_6,
-                R.id.playlist_7,
-                R.id.playlist_8,
-                R.id.playlist_9,
-                R.id.playlist_10,
+                R.id.playlist_choice_textview,
+                R.id.playlist_1_button,
+                R.id.playlist_2_button,
+                R.id.playlist_3_button,
+                R.id.playlist_4_button,
+                R.id.playlist_5_button,
+                R.id.playlist_6_button,
+                R.id.playlist_7_button,
+                R.id.playlist_8_button,
+                R.id.playlist_9_button,
         };
     }
 
@@ -39,16 +39,15 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     public void onCreate() {
         super.initViews();
 
-        ((Button)mViews.get(R.id.playlist_1)).setOnClickListener(onPlaylistOneButtonClicked);
-        ((Button)mViews.get(R.id.playlist_2)).setOnClickListener(onPlaylistTwoButtonClicked);
-        ((Button)mViews.get(R.id.playlist_3)).setOnClickListener(onPlaylistThreeButtonClicked);
-        ((Button)mViews.get(R.id.playlist_4)).setOnClickListener(onPlaylistFourButtonClicked);
-        ((Button)mViews.get(R.id.playlist_5)).setOnClickListener(onPlaylistFiveButtonClicked);
-        ((Button)mViews.get(R.id.playlist_6)).setOnClickListener(onPlaylistSixButtonClicked);
-        ((Button)mViews.get(R.id.playlist_7)).setOnClickListener(onPlaylistSevenButtonClicked);
-        ((Button)mViews.get(R.id.playlist_8)).setOnClickListener(onPlaylistEightButtonClicked);
-        ((Button)mViews.get(R.id.playlist_9)).setOnClickListener(onPlaylistNineButtonClicked);
-        ((Button)mViews.get(R.id.playlist_10)).setOnClickListener(onPlaylistTenButtonClicked);
+        ((Button)mViews.get(R.id.playlist_1_button)).setOnClickListener(onPlaylistOneButtonClicked);
+        ((Button)mViews.get(R.id.playlist_2_button)).setOnClickListener(onPlaylistTwoButtonClicked);
+        ((Button)mViews.get(R.id.playlist_3_button)).setOnClickListener(onPlaylistThreeButtonClicked);
+        ((Button)mViews.get(R.id.playlist_4_button)).setOnClickListener(onPlaylistFourButtonClicked);
+        ((Button)mViews.get(R.id.playlist_5_button)).setOnClickListener(onPlaylistFiveButtonClicked);
+        ((Button)mViews.get(R.id.playlist_6_button)).setOnClickListener(onPlaylistSixButtonClicked);
+        ((Button)mViews.get(R.id.playlist_7_button)).setOnClickListener(onPlaylistSevenButtonClicked);
+        ((Button)mViews.get(R.id.playlist_8_button)).setOnClickListener(onPlaylistEightButtonClicked);
+        ((Button)mViews.get(R.id.playlist_9_button)).setOnClickListener(onPlaylistNineButtonClicked);
     }
 
     @Override
@@ -140,16 +139,6 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
         @Override
         public void onClick(View view) {
             mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX7YCknf2jT6s", 50);
-
-            mActivityType = mActivityType.GameUI;
-            notifyObserver(Event.NextActivity);
-        }
-    };
-
-    View.OnClickListener onPlaylistTenButtonClicked = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DWWavShqgIPsw", 50);
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);

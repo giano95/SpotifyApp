@@ -1,8 +1,45 @@
 <resources>
+    <!--default string values created by android studio-->
     <string name="app_name">MyFirstSpotifyApp</string>
     <string name="action_settings">Settings</string>
-    <string name="login_button_label">Login</string>
-    <string name="logout_button_label">Logout</string>
-    <string name="play_button_label">Play</string>
-    <string name="score_label">Punteggio:</string>
+
+    <!--string values of the Login activity-->
+    <string name="login_button">Login</string>
+    <string name="logout_button">Logout</string>
+    <string name="play_button">Play</string>
+
+    <!--string values of the GameModeChoice activity-->
+    <string name="game_mode_choice_textview">Choose the game mode</string>
+    <string name="find_track_name_button">Guess the song</string>
+    <string name="find_artist_name_button">Guess the artist</string>
+
+    <!--string values of the DifficultyChoice activity-->
+    <string name="difficulty_choice_textview">Choose the difficulty</string>
+    <string name="easy_button">Easy</string>
+    <string name="hard_button">Hard</string>
+
+    <!--string values of the PlaylistChoice activity-->
+    <string name="playlist_choice_textview">Choose the genre</string>
+    <string name="playlist_1_button">Commercial</string>
+    <string name="playlist_2_button">90s italian song</string>
+    <string name="playlist_3_button">Indie</string>
+    <string name="playlist_4_button">Pop</string>
+    <string name="playlist_5_button">Rock</string>
+    <string name="playlist_6_button">Metal</string>
+    <string name="playlist_7_button">Italian Rap</string>
+    <string name="playlist_8_button">Dance</string>
+    <string name="playlist_9_button">Jazz</string>
+
+    <!--string values of the FindArtistNameHard and FindTrackNameHard activities-->
+    <string name="edit_name_track_edittext">Enter track name</string>
+    <string name="edit_name_artist_edittext">Enter artist name</string>
+    <string name="enter_button">Enter</string>
+    <string name="skip_button">Skip</string>
+    <string name="skip_finished_button">Skip finished</string>
+
+    <!--string values used by multiple activities-->
+    <string name="score_textview">Score</string>
+    <string name="right_name_toast">yeah buddy +10!</string>
+    <string name="wrong_name_toast">sorry bro, wrong name</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity;
 
+
 import android.app.Activity;
 import android.os.CountDownTimer;
 import android.transition.Scene;
@@ -10,25 +11,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.marco.myfirstspotifyapp.ArtistPlaylistChoice;
 import com.example.marco.myfirstspotifyapp.Event;
 import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.R;
-import com.example.marco.myfirstspotifyapp.StringHandler;
 
-
-public class FindTrackNameHardUI extends AbstractActivityUI {
+public class FindArtistNameHardUI extends AbstractActivityUI {
 
     private int mSkipCount;
+    private ArtistPlaylistChoice artistPlaylistChoice;
     private CountDownTimer mTimer;
     private Integer mScore;
-    private String mCurrentName;
-    private int mTipsCount;
 
-    public FindTrackNameHardUI(Activity activity, MySpotify mySpotify, ViewGroup rootContainer) {
-        super(activity, mySpotify, rootContainer);
+    public FindArtistNameHardUI(Activity mActivity, MySpotify mySpotify, ViewGroup rootContainer) {
+        super(mActivity, mySpotify, rootContainer);
         super.mScene = Scene.getSceneForLayout(mRootContainer, R.layout.hard_mode, mActivity);
         super.mViewsId = new int[]{
-                R.id.tips_bar_textview,
                 R.id.edit_name_edittext,
                 R.id.enter_button,
                 R.id.skip_button,
@@ -36,16 +34,13 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
                 R.id.chronometer_hard_textview,
         };
 
-        this.mTipsCount = 0;
+        this.artistPlaylistChoice = new ArtistPlaylistChoice("italian");
         this.mSkipCount = 3;
         this.mScore = 0;
         this.mTimer = new CountDownTimer(45000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 ((TextView)mViews.get(R.id.chronometer_hard_textview)).setText("" + millisUntilFinished / 1000);
-
-                ((TextView)mViews.get(R.id.tips_bar_textview)).setText(StringHandler.getTipsString(mCurrentName, mTipsCount));
-                mTipsCount++;
             }
 
             @Override
@@ -54,8 +49,8 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
                 notifyObserver(Event.EndOfGame);
             }
         };
-    }
 
+    }
     View.OnClickListener  onSkipButtonPressed = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -63,9 +58,7 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
                 mySpotify.playRandomSong();
                 mSkipCount--;
             }
-
-            //this method could help to found the song
-            if(mSkipCount == 0){
+            if(mSkipCount ==0){
                 ((Button)mViews.get(R.id.skip_button)).setText(R.string.skip_finished_button);
                 ((Button)mViews.get(R.id.skip_button)).setEnabled(false);
 
@@ -73,21 +66,20 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
         }
     };
 
-
     View.OnClickListener onEnterButtonPressed = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            String name = (mySpotify.getCurrentTrackArtist());
+            String name2 = new String ((((EditText)mViews.get(R.id.edit_name_edittext)).getText()).toString());
 
-            String editName = new String ((((EditText)mViews.get(R.id.edit_name_edittext)).getText()).toString());
 
-            if(StringHandler.compare(mCurrentName, editName)){
+            if(name.equals(name2)){
                 mScore += 10;
-
                 ((EditText)mViews.get(R.id.edit_name_edittext)).setText("");
-
+                mySpotify.setPlaylist((artistPlaylistChoice.getRandomPlaylist()), 15);
                 mySpotify.playRandomSong();
-
-            } else {
+            }
+            else {
                 Toast toast = Toast.makeText(mActivity.getApplicationContext(), R.string.wrong_name_toast, Toast.LENGTH_SHORT);
                 toast.show();
 
@@ -98,14 +90,8 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
     };
 
 
-
-
     @Override
     public void update() {
-
-        mCurrentName = StringHandler.setProperly(mySpotify.getCurrentTrackName());
-        mTipsCount = 0;
-        ((TextView)mViews.get(R.id.tips_bar_textview)).setText("");
 
         ((TextView)mViews.get(R.id.score_hard_textview)).setText(mActivity.getString(R.string.score_textview) + " " + mScore);
     }
@@ -113,7 +99,7 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
     @Override
     public void onCreate() {
         super.initViews();
-        ((EditText)mViews.get(R.id.edit_name_edittext)).setHint(R.string.edit_name_track_edittext);
+        ((EditText)mViews.get(R.id.edit_name_edittext)).setHint(R.string.edit_name_artist_edittext);
         ((Button)mViews.get(R.id.skip_button)).setOnClickListener(onSkipButtonPressed);
         ((Button)mViews.get(R.id.enter_button)).setOnClickListener(onEnterButtonPressed);
 
@@ -124,6 +110,5 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
     @Override
     public void onDestroy() {
         mySpotify.pause();
-        mTimer.cancel();
     }
 }

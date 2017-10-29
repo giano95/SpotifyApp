@@ -8,35 +8,33 @@
     android:paddingTop="@dimen/in_time_vertical_margin">
 
     <TextView
-        android:id="@+id/mode_textView"
-        android:layout_width="match_parent"
+        android:id="@+id/game_mode_choice_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="scegli la modalità di gioco:" />
+        android:text="@string/game_mode_choice_textview"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/mode1"
-        android:layout_width="match_parent"
+        android:id="@+id/find_track_name_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mode_textView"
         android:layout_centerHorizontal="true"
-        android:text="indovina il nome" />
+        android:layout_marginTop="85dp"
+        android:text="@string/find_track_name_button" />
 
     <Button
-        android:id="@+id/mode2"
-        android:layout_width="match_parent"
+        android:id="@+id/find_artist_name_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mode1"
+        android:layout_below="@+id/find_track_name_button"
         android:layout_centerHorizontal="true"
-        android:text="trova l'artista"/>
+        android:layout_marginTop="116dp"
+        android:text="@string/find_artist_name_button" />
 
-    <Button
-        android:id="@+id/mode3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mode2"
-        android:layout_centerHorizontal="true"
-        android:text="modalità 3"/>
 
 </RelativeLayout>
