@@ -76,15 +76,18 @@ public class MyActivityManager implements Observer{
 
 
 // METHOD USED TO MOVE TO THE PREVIOUS ACTIVITY
-    public void back(){
+    public void back(int num){
 
-        mRunningActivity.onDestroy();
+        // we go back num times
+        for(int i = 0; i < num; i++){
+            mRunningActivity.onDestroy();
 
-        // we pop the previous activity from the stack
-        mActivities.pollLast();
+            // we pop the previous activity from the stack
+            mActivities.pollLast();
 
-        // we set the activity we just added as the current one
-        mRunningActivity = mActivities.getLast();
+            // we set the activity we just added as the current one
+            mRunningActivity = mActivities.getLast();
+        }
 
         TransitionManager.go(mRunningActivity.getScene(), mTransition);
 
@@ -95,9 +98,16 @@ public class MyActivityManager implements Observer{
 
 
 // METHOD USED TO PROPERLY HANDLE THE BACK BUTTON EVENT
-    public boolean isFirstActivity(){
+    public boolean isLoginActivity(){
 
-        if(mActivities.size() <= 1)
+        if(mRunningActivity instanceof LoginUI)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean isGameOverActivity(){
+        if(mRunningActivity instanceof GameOverUI)
             return true;
         else
             return false;
@@ -112,20 +122,20 @@ public class MyActivityManager implements Observer{
     }
 
 
-    // LISTENER METHODS
+// LISTENER METHODS
     @Override
-    public void onEventListener(ActivityType activityType, MySpotify mySpotify, Event event) {
+    public void onEventListener(ActivityType activityType, MySpotify mySpotify, Object object) {
 
-        switch(event){
-            case EndOfGame:
-                Toast toast = Toast.makeText(mActivity.getApplicationContext(), "ehi zio guarda come ti implemento il pattern Observer", Toast.LENGTH_SHORT);
-                toast.show();
-                break;
-            case NextActivity:
-                // we push the next activity to the stack
-                mActivities.addLast(mFactory.create(activityType, mActivity, mySpotify, mRootContainer));
-                next();
-                break;
-        }
+        // we push the GameOver activity to the stack
+        mActivities.addLast(new GameOverUI(mActivity, mySpotify, mRootContainer, (Integer) object));
+        next();
+    }
+
+    @Override
+    public void onEventListener(ActivityType activityType, MySpotify mySpotify) {
+
+        // we push the next activity to the stack
+        mActivities.addLast(mFactory.create(activityType, mActivity, mySpotify, mRootContainer));
+        next();
     }
 }

@@ -2,11 +2,9 @@ package com.example.marco.myfirstspotifyapp;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.view.ViewGroup;
 
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.MyActivity;
 import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.MyActivityManager;
 import com.spotify.sdk.android.player.ConnectionStateCallback;
 import com.spotify.sdk.android.player.Error;
@@ -68,7 +66,7 @@ public class MainActivity extends Activity implements SpotifyPlayer.Notification
     @Override
     protected void onDestroy() {
 
-        // we handle the destory event by also destroyng all the Spotify stuff
+        // we handle the destroy event by also destroying all the Spotify stuff
         mySpotify.destroy();
         super.onDestroy();
     }
@@ -76,12 +74,17 @@ public class MainActivity extends Activity implements SpotifyPlayer.Notification
     @Override
     public void onBackPressed() {
 
-        if(myActivityManager.isFirstActivity()) {
-            // if it is the first activity (login) we use native backButton functionality
+        if(myActivityManager.isLoginActivity()) {
+            // if we are on the login activity than we use native backButton functionality
             super.onBackPressed();
+
+        } else if(myActivityManager.isGameOverActivity()){
+            // if we are on the GameOver Activity than we want to go back to the Login Activity
+            myActivityManager.back(5);
+
         } else {
             // else we handle the backButton pressed event by returning into the last activity
-            myActivityManager.back();
+            myActivityManager.back(1);
         }
     }
 

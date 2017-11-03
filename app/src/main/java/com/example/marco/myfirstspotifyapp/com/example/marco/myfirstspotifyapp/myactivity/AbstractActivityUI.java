@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.EditText;
 
@@ -22,13 +23,11 @@ public abstract class AbstractActivityUI implements Observable{
 // VARIABLES
     protected Scene mScene;
     protected ViewGroup mRootContainer;
-    protected int mNextID;
     protected int[] mViewsId;
     protected Activity mActivity;
     protected MySpotify mySpotify;
     protected HashMap<Integer, View> mViews;
     protected ArrayList<Observer> mObservers;
-    protected AbstractActivityUI mNextAbstractActivityUI;
     protected ActivityType mActivityType;
 
 // CONSTRUCTOR
@@ -61,6 +60,9 @@ public abstract class AbstractActivityUI implements Observable{
             if(mActivity.findViewById(id) instanceof EditText){
                 mViews.put(id, (EditText) mActivity.findViewById(id));
             }
+            if(mActivity.findViewById(id) instanceof RatingBar){
+                mViews.put(id, (RatingBar) mActivity.findViewById(id));
+            }
         }
     }
 
@@ -89,7 +91,14 @@ public abstract class AbstractActivityUI implements Observable{
     public void notifyObserver(Event event) {
 
         for(Observer observer: mObservers){
-            observer.onEventListener(mActivityType, mySpotify, event);
+            observer.onEventListener(mActivityType, mySpotify);
+        }
+    }
+
+    @Override
+    public void notifyObserver(Event event, Object object) {
+        for(Observer observer: mObservers){
+            observer.onEventListener(mActivityType, mySpotify,object);
         }
     }
 }

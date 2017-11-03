@@ -44,14 +44,17 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
             public void onTick(long millisUntilFinished) {
                 ((TextView)mViews.get(R.id.chronometer_hard_textview)).setText("" + millisUntilFinished / 1000);
 
-                ((TextView)mViews.get(R.id.tips_bar_textview)).setText(StringHandler.getTipsString(mCurrentName, mTipsCount));
-                mTipsCount++;
+                // every 2 seconds we stream a new char on the tipsBar
+                if((millisUntilFinished / 1000) % 2 == 0){
+                    ((TextView)mViews.get(R.id.tips_bar_textview)).setText(StringHandler.getTipsString(mCurrentName, mTipsCount));
+                    mTipsCount++;
+                }
             }
 
             @Override
             public void onFinish() {
                 ((TextView)mViews.get(R.id.chronometer_hard_textview)).setText("finito!");
-                notifyObserver(Event.EndOfGame);
+                notifyObserver(Event.EndOfGame, new Integer(mScore));
             }
         };
     }
@@ -92,7 +95,7 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
                 toast.show();
 
                 mScore -= 10;
-                update();
+                ((TextView)mViews.get(R.id.score_hard_textview)).setText(mActivity.getString(R.string.score_textview) + " " + mScore);
             }
         }
     };

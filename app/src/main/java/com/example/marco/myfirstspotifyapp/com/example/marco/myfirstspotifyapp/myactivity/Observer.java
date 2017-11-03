@@ -5,6 +5,8 @@ import com.example.marco.myfirstspotifyapp.ActivityType;
 import com.example.marco.myfirstspotifyapp.Event;
 import com.example.marco.myfirstspotifyapp.MySpotify;
 
-public interface Observer {
-    public void onEventListener(ActivityType activityType, MySpotify mySpotify, Event event);
+public interface Observer{
+
+    public void onEventListener(ActivityType activityType, MySpotify mySpotify, Object object);
+    public void onEventListener(ActivityType activityType, MySpotify mySpotify);
 }

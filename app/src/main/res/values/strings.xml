@@ -37,6 +37,10 @@
     <string name="skip_button">Skip</string>
     <string name="skip_finished_button">Skip finished</string>
 
+    <!--string values of the GameOver activity-->
+    <string name="game_over_textview">Game Over</string>
+    <string name="game_over_2_textview">you finished with a score of</string>
+
     <!--string values used by multiple activities-->
     <string name="score_textview">Score</string>
     <string name="right_name_toast">yeah buddy +10!</string>

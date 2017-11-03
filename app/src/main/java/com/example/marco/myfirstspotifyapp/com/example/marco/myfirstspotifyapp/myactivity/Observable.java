@@ -6,4 +6,5 @@ public interface Observable {
     public void registerObserver(Observer observer);
     public void removeObserver(Observer observer);
     public void notifyObserver(Event event);
+    public void notifyObserver(Event event, Object object);
 }

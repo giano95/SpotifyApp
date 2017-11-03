@@ -37,6 +37,10 @@
     <string name="skip_button">Skippa</string>
     <string name="skip_finished_button">Skip finiti</string>
 
+    <!--string values of the GameOver activity-->
+    <string name="game_over_textview">Game Over</string>
+    <string name="game_over_2_textview">hai terminato con un punteggio di</string>
+
     <!--string values used by multiple activities-->
     <string name="score_textview">Punteggio</string>
     <string name="right_name_toast">grande cumpa +10!</string>

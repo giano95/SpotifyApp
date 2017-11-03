@@ -46,7 +46,7 @@ public class FindArtistNameEasyUI extends AbstractActivityUI {
             @Override
             public void onFinish() {
                 ((TextView)mViews.get(R.id.chronometer_easy_textview)).setText("finito!");
-                notifyObserver(Event.EndOfGame);
+                notifyObserver(Event.EndOfGame, new Integer(mScore));
             }
         };
     }
