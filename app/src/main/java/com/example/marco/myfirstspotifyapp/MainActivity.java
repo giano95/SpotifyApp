@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.app.Activity;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.MyActivityManager;
 import com.spotify.sdk.android.player.ConnectionStateCallback;
 import com.spotify.sdk.android.player.Error;
 import com.spotify.sdk.android.player.PlayerEvent;
 import com.spotify.sdk.android.player.SpotifyPlayer;
+
+import io.realm.Realm;
 
 
 public class MainActivity extends Activity implements SpotifyPlayer.NotificationCallback, ConnectionStateCallback
@@ -18,6 +22,7 @@ public class MainActivity extends Activity implements SpotifyPlayer.Notification
 // VARIABLES
     private MyActivityManager myActivityManager;    // used to manage the virtual activities
     private MySpotify mySpotify;                    // used to handle the Spotify Android SDK
+    private RealmDB realmDB;                        // used to handle the Realm database
 
 
 // ANDROID ACTIVITY METHODS
@@ -26,15 +31,22 @@ public class MainActivity extends Activity implements SpotifyPlayer.Notification
 
         // we call the father method and we set the root container background
         super.onCreate(savedInstanceState);
+
+        // remove the title bar and the notification bar (N.B. do this before set the content view)
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        RealmDB.init(this);
 
         // instantiate the objects
         mySpotify = new MySpotify(this, MainActivity.this);
+        realmDB = realmDB.create(this);
         myActivityManager = new MyActivityManager((ViewGroup) findViewById(R.id.rootContainer), this);
+
 
         // the manager initializes the first virtual activity and displays it
         myActivityManager.start(mySpotify);
-
 
     }
 
@@ -69,6 +81,7 @@ public class MainActivity extends Activity implements SpotifyPlayer.Notification
         // we handle the destroy event by also destroying all the Spotify stuff
         mySpotify.destroy();
         super.onDestroy();
+        RealmDB.getInstance().getRealm().close();
     }
 
     @Override

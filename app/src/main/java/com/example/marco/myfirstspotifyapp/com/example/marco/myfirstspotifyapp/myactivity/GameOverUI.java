@@ -2,17 +2,28 @@ package com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.
 
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.transition.Scene;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.marco.myfirstspotifyapp.MainActivity;
 import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.R;
+import com.example.marco.myfirstspotifyapp.RealmDB;
+import com.example.marco.myfirstspotifyapp.Score;
+
+import io.realm.Realm;
 
 public class GameOverUI extends AbstractActivityUI {
 
     private Integer mReachedScore;
+    private RealmDB realmDB;
 
     public GameOverUI(Activity activity, MySpotify mySpotify, ViewGroup rootContainer, Integer reachedScore) {
         super(activity, mySpotify, rootContainer);
@@ -25,6 +36,7 @@ public class GameOverUI extends AbstractActivityUI {
         };
 
         this.mReachedScore = reachedScore;
+        this.realmDB = RealmDB.getInstance();
     }
 
     @Override
@@ -38,8 +50,19 @@ public class GameOverUI extends AbstractActivityUI {
 
         mySpotify.pause();
 
+        realmDB.addScore(mReachedScore);
+
         ((TextView)mViews.get(R.id.game_over_score_textview)).setText("" + mReachedScore);
         ((RatingBar)mViews.get(R.id.score_ratingBar)).setNumStars(getNumStars(mReachedScore));
+
+        //set tint white
+        Drawable stars = (LayerDrawable) ((RatingBar)mViews.get(R.id.score_ratingBar)).getProgressDrawable();
+        DrawableCompat.setTint(stars, Color.WHITE);
+
+        //set color yellow
+        LayerDrawable stars2 = (LayerDrawable) ((RatingBar)mViews.get(R.id.score_ratingBar)).getProgressDrawable();
+        stars2.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+
         ((RatingBar)mViews.get(R.id.score_ratingBar)).setIsIndicator(true);
     }
 

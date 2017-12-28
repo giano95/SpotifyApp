@@ -12,6 +12,8 @@ import com.example.marco.myfirstspotifyapp.ActivityType;
 import com.example.marco.myfirstspotifyapp.Event;
 import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.R;
+import com.example.marco.myfirstspotifyapp.RealmDB;
+
 import java.util.ArrayDeque;
 
 public class MyActivityManager implements Observer{
@@ -32,7 +34,7 @@ public class MyActivityManager implements Observer{
         this.mActivity = activity;
         this.mActivities = new ArrayDeque<AbstractActivityUI>();
         this.mTransition = TransitionInflater.from(mActivity).inflateTransition(R.transition.transition_1);
-        this.mFactory = new ActivityFactory();
+        this.mFactory = ActivityFactory.init();
     }
 
 

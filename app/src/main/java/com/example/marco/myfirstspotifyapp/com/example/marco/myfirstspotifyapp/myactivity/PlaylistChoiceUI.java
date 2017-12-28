@@ -7,11 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.marco.myfirstspotifyapp.ActivityFactory;
+import com.example.marco.myfirstspotifyapp.ActivityType;
 import com.example.marco.myfirstspotifyapp.Event;
+import com.example.marco.myfirstspotifyapp.Genre;
 import com.example.marco.myfirstspotifyapp.MySpotify;
 import com.example.marco.myfirstspotifyapp.R;
 
 public class PlaylistChoiceUI extends AbstractActivityUI {
+
+    private ActivityType mode;
+    private ActivityType difficulty;
 
     public PlaylistChoiceUI(Activity activity, MySpotify mySpotify, ViewGroup rootContainer){
         super(activity, mySpotify, rootContainer);
@@ -28,6 +34,9 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
                 R.id.playlist_8_button,
                 R.id.playlist_9_button,
         };
+
+        mode = ActivityFactory.getInstance().mode;
+        difficulty = ActivityFactory.getInstance().difficulty;
     }
 
     @Override
@@ -58,7 +67,12 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     View.OnClickListener onPlaylistOneButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF", 50);
+
+            if(mode == ActivityType.findArtistName && difficulty == ActivityType.hard)
+                mySpotify.setArtistPlaylist(Genre.Commercial);
+            else
+                mySpotify.setTrackPlaylist("spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF", 50);
+
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);
@@ -68,7 +82,11 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     View.OnClickListener onPlaylistTwoButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DWXnfI9qTCXnT", 50);
+
+            if(mode == ActivityType.findArtistName && difficulty == ActivityType.hard)
+                mySpotify.setArtistPlaylist(Genre.italian_90s_song);
+            else
+                mySpotify.setTrackPlaylist("spotify:user:spotify:playlist:37i9dQZF1DWXnfI9qTCXnT", 50);
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);
@@ -78,7 +96,11 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     View.OnClickListener onPlaylistThreeButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX6PSDDh80gxI", 50);
+
+            if(mode == ActivityType.findArtistName && difficulty == ActivityType.hard)
+                mySpotify.setArtistPlaylist(Genre.Indie);
+            else
+                mySpotify.setTrackPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX6PSDDh80gxI", 50);
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);
@@ -88,7 +110,11 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     View.OnClickListener onPlaylistFourButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX6mWRaog94SQ", 50);
+
+            if(mode == ActivityType.findArtistName && difficulty == ActivityType.hard)
+                mySpotify.setArtistPlaylist(Genre.Pop);
+            else
+                mySpotify.setTrackPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX6mWRaog94SQ", 50);
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);
@@ -98,7 +124,11 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     View.OnClickListener onPlaylistFiveButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DWXRqgorJj26U", 129);
+
+            if(mode == ActivityType.findArtistName && difficulty == ActivityType.hard)
+                mySpotify.setArtistPlaylist(Genre.Rock);
+            else
+                mySpotify.setTrackPlaylist("spotify:user:spotify:playlist:37i9dQZF1DWXRqgorJj26U", 129);
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);
@@ -108,7 +138,11 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     View.OnClickListener onPlaylistSixButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX2LTcinqsO68", 57);
+
+            if(mode == ActivityType.findArtistName && difficulty == ActivityType.hard)
+                mySpotify.setArtistPlaylist(Genre.Metal);
+            else
+                mySpotify.setTrackPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX2LTcinqsO68", 57);
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);
@@ -118,7 +152,11 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     View.OnClickListener onPlaylistSevenButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX14EWeH2Pwf3", 50);
+
+            if(mode == ActivityType.findArtistName && difficulty == ActivityType.hard)
+                mySpotify.setArtistPlaylist(Genre.Italian_Rap);
+            else
+                mySpotify.setTrackPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX14EWeH2Pwf3", 50);
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);
@@ -128,7 +166,11 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     View.OnClickListener onPlaylistEightButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX2ENAPP1Tyed", 50);
+
+            if(mode == ActivityType.findArtistName && difficulty == ActivityType.hard)
+                mySpotify.setArtistPlaylist(Genre.Dance);
+            else
+                mySpotify.setTrackPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX2ENAPP1Tyed", 50);
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);
@@ -138,7 +180,11 @@ public class PlaylistChoiceUI extends AbstractActivityUI {
     View.OnClickListener onPlaylistNineButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mySpotify.setPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX7YCknf2jT6s", 50);
+
+            if(mode == ActivityType.findArtistName && difficulty == ActivityType.hard)
+                mySpotify.setArtistPlaylist(Genre.Jazz);
+            else
+                mySpotify.setTrackPlaylist("spotify:user:spotify:playlist:37i9dQZF1DX7YCknf2jT6s", 50);
 
             mActivityType = mActivityType.GameUI;
             notifyObserver(Event.NextActivity);

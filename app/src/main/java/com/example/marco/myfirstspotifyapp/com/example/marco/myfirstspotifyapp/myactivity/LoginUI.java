@@ -6,6 +6,7 @@ import android.transition.Scene;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.marco.myfirstspotifyapp.ActivityType;
 import com.example.marco.myfirstspotifyapp.Event;
@@ -23,6 +24,7 @@ public class LoginUI extends AbstractActivityUI implements Observable{
         super.mViewsId = new int[]{
                 R.id.login_button,
                 R.id.play_button,
+                R.id.show_scores_button,
         };
     }
 
@@ -31,7 +33,6 @@ public class LoginUI extends AbstractActivityUI implements Observable{
 
         mLoggedIn = mySpotify.isLoggedIn();
 
-        ((Button)mViews.get(R.id.login_button)).setText(mLoggedIn ? R.string.logout_button : R.string.login_button);
         ((Button)mViews.get(R.id.play_button)).setEnabled(mLoggedIn);
     }
 
@@ -44,8 +45,16 @@ public class LoginUI extends AbstractActivityUI implements Observable{
     public void onCreate() {
         super.initViews();
 
-        ((Button)mViews.get(R.id.login_button)).setOnClickListener(onLoginButtonClicked);
+        //auto-login
+        if (!mySpotify.isLoggedIn()) {
+            Util.logStatus("Logging in");
+            mySpotify.openLoginWindow();
+        }
+
         ((Button)mViews.get(R.id.play_button)).setOnClickListener(onPlayButtonClicked);
+        ((ImageButton)mViews.get(R.id.login_button)).setOnClickListener(onLoginButtonClicked);
+        ((ImageButton)mViews.get(R.id.show_scores_button)).setOnClickListener(onShowScoresButtonClicked);
+
     }
 
 
@@ -67,6 +76,16 @@ public class LoginUI extends AbstractActivityUI implements Observable{
 
             mActivityType = ActivityType.GameModeChoiceUI;
             notifyObserver(Event.NextActivity);
+        }
+    };
+
+    View.OnClickListener onShowScoresButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            mActivityType = ActivityType.ShowBestScore;
+            notifyObserver(Event.NextActivity);
+
         }
     };
 }

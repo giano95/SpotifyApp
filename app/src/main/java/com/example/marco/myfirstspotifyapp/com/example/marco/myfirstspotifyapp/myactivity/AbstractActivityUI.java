@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -63,6 +64,9 @@ public abstract class AbstractActivityUI implements Observable{
             if(mActivity.findViewById(id) instanceof RatingBar){
                 mViews.put(id, (RatingBar) mActivity.findViewById(id));
             }
+            if(mActivity.findViewById(id) instanceof ImageButton){
+                mViews.put(id, (ImageButton) mActivity.findViewById(id));
+            }
         }
     }
 
@@ -98,7 +102,7 @@ public abstract class AbstractActivityUI implements Observable{
     @Override
     public void notifyObserver(Event event, Object object) {
         for(Observer observer: mObservers){
-            observer.onEventListener(mActivityType, mySpotify,object);
+            observer.onEventListener(mActivityType, mySpotify, object);
         }
     }
 }

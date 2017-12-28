@@ -12,5 +12,6 @@ public enum ActivityType {
     PlaylistChoiceUI,
     FindArtistUI,
     InTimeModeUI,
-    GameUI
+    GameUI,
+    ShowBestScore,
 }

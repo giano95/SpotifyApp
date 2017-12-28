@@ -7,6 +7,10 @@
     <string name="login_button">Login</string>
     <string name="logout_button">Logout</string>
     <string name="play_button">Play</string>
+    <string name="spotify_game_textview">Spotify\nGame</string>
+
+    <!--string values of the ShowBestScore activity-->
+    <string name="show_best_score_textview">The best scores</string>
 
     <!--string values of the GameModeChoice activity-->
     <string name="game_mode_choice_textview">Choose the game mode</string>
@@ -21,7 +25,7 @@
     <!--string values of the PlaylistChoice activity-->
     <string name="playlist_choice_textview">Choose the genre</string>
     <string name="playlist_1_button">Commercial</string>
-    <string name="playlist_2_button">90s italian song</string>
+    <string name="playlist_2_button">italian 90s song</string>
     <string name="playlist_3_button">Indie</string>
     <string name="playlist_4_button">Pop</string>
     <string name="playlist_5_button">Rock</string>

@@ -23,6 +23,7 @@ public class FindTrackNameEasyUI extends AbstractActivityUI {
     private Random mRandomGenerator;
     private Integer mScore;
     private CountDownTimer mTimer;
+    private long countDown;
 
     public FindTrackNameEasyUI(Activity mActivity, MySpotify mySpotify, ViewGroup rootContainer){
         super(mActivity,mySpotify,rootContainer);
@@ -38,18 +39,8 @@ public class FindTrackNameEasyUI extends AbstractActivityUI {
 
         this.mRandomGenerator = new Random();
         this.mScore = 0;
-        this.mTimer = new CountDownTimer(45000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                ((TextView)mViews.get(R.id.chronometer_easy_textview)).setText("" + millisUntilFinished / 1000);
-            }
 
-            @Override
-            public void onFinish() {
-                ((TextView)mViews.get(R.id.chronometer_easy_textview)).setText("finito!");
-                notifyObserver(Event.EndOfGame, new Integer(mScore));
-            }
-        };
+        createTimer(15000);
     }
 
     @Override
@@ -97,6 +88,11 @@ public class FindTrackNameEasyUI extends AbstractActivityUI {
             mScore += 10;
             Toast toast = Toast.makeText(mActivity.getApplicationContext(), R.string.right_name_toast, Toast.LENGTH_SHORT);
             toast.show();
+
+            // add 10 seconds on the countDown and set the timer
+            countDown += 5000;
+            setTimer(countDown);
+
             mySpotify.playRandomSong();
         }
     };
@@ -108,4 +104,27 @@ public class FindTrackNameEasyUI extends AbstractActivityUI {
             mySpotify.playRandomSong();
         }
     };
+
+    private void setTimer(long countDownTime) {
+        mTimer.cancel();
+        createTimer(countDownTime);
+        mTimer.start();
+    }
+
+    private void createTimer(long countDownTime) {
+
+        mTimer = new CountDownTimer(countDownTime, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                ((TextView)mViews.get(R.id.chronometer_easy_textview)).setText("" + millisUntilFinished / 1000);
+                countDown = millisUntilFinished;
+            }
+
+            @Override
+            public void onFinish() {
+                ((TextView)mViews.get(R.id.chronometer_easy_textview)).setText("finito!");
+                notifyObserver(Event.EndOfGame, new Integer(mScore));
+            }
+        };
+    }
 }

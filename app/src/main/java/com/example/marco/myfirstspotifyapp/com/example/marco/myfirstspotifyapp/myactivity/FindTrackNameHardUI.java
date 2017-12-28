@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.transition.Scene;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,11 +19,11 @@ import com.example.marco.myfirstspotifyapp.StringHandler;
 
 public class FindTrackNameHardUI extends AbstractActivityUI {
 
-    private int mSkipCount;
     private CountDownTimer mTimer;
     private Integer mScore;
     private String mCurrentName;
     private int mTipsCount;
+    private long countDown;
 
     public FindTrackNameHardUI(Activity activity, MySpotify mySpotify, ViewGroup rootContainer) {
         super(activity, mySpotify, rootContainer);
@@ -37,44 +38,10 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
         };
 
         this.mTipsCount = 0;
-        this.mSkipCount = 3;
         this.mScore = 0;
-        this.mTimer = new CountDownTimer(45000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                ((TextView)mViews.get(R.id.chronometer_hard_textview)).setText("" + millisUntilFinished / 1000);
 
-                // every 2 seconds we stream a new char on the tipsBar
-                if((millisUntilFinished / 1000) % 2 == 0){
-                    ((TextView)mViews.get(R.id.tips_bar_textview)).setText(StringHandler.getTipsString(mCurrentName, mTipsCount));
-                    mTipsCount++;
-                }
-            }
-
-            @Override
-            public void onFinish() {
-                ((TextView)mViews.get(R.id.chronometer_hard_textview)).setText("finito!");
-                notifyObserver(Event.EndOfGame, new Integer(mScore));
-            }
-        };
+        createTimer(30000);
     }
-
-    View.OnClickListener  onSkipButtonPressed = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if(mSkipCount >0) {
-                mySpotify.playRandomSong();
-                mSkipCount--;
-            }
-
-            //this method could help to found the song
-            if(mSkipCount == 0){
-                ((Button)mViews.get(R.id.skip_button)).setText(R.string.skip_finished_button);
-                ((Button)mViews.get(R.id.skip_button)).setEnabled(false);
-
-            }
-        }
-    };
 
 
     View.OnClickListener onEnterButtonPressed = new View.OnClickListener() {
@@ -87,6 +54,10 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
                 mScore += 10;
 
                 ((EditText)mViews.get(R.id.edit_name_edittext)).setText("");
+
+                // add 10 seconds on the countDown and set the timer
+                countDown += 10000;
+                setTimer(countDown);
 
                 mySpotify.playRandomSong();
 
@@ -117,8 +88,8 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
     public void onCreate() {
         super.initViews();
         ((EditText)mViews.get(R.id.edit_name_edittext)).setHint(R.string.edit_name_track_edittext);
-        ((Button)mViews.get(R.id.skip_button)).setOnClickListener(onSkipButtonPressed);
         ((Button)mViews.get(R.id.enter_button)).setOnClickListener(onEnterButtonPressed);
+        ((ViewManager)mViews.get(R.id.skip_button).getParent()).removeView(mViews.get(R.id.skip_button));
 
         mTimer.start();
         mySpotify.playRandomSong();
@@ -128,5 +99,35 @@ public class FindTrackNameHardUI extends AbstractActivityUI {
     public void onDestroy() {
         mySpotify.pause();
         mTimer.cancel();
+    }
+
+    private void setTimer(long countDownTime) {
+        mTimer.cancel();
+        createTimer(countDownTime);
+        mTimer.start();
+    }
+
+    private void createTimer(long countDownTime) {
+
+        mTimer = new CountDownTimer(countDownTime, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                ((TextView)mViews.get(R.id.chronometer_hard_textview)).setText("" + millisUntilFinished / 1000);
+
+                // every 2 seconds we stream a new char on the tipsBar
+                if((millisUntilFinished / 1000) % 2 == 0){
+                    ((TextView)mViews.get(R.id.tips_bar_textview)).setText(StringHandler.getTipsString(mCurrentName, mTipsCount));
+                    mTipsCount++;
+                }
+
+                countDown = millisUntilFinished;
+            }
+
+            @Override
+            public void onFinish() {
+                ((TextView)mViews.get(R.id.chronometer_hard_textview)).setText("finito!");
+                notifyObserver(Event.EndOfGame, new Integer(mScore));
+            }
+        };
     }
 }

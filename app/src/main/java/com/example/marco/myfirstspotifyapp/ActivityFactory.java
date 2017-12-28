@@ -4,26 +4,37 @@ package com.example.marco.myfirstspotifyapp;
 import android.app.Activity;
 import android.view.ViewGroup;
 
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.AbstractActivityUI;
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.DifficultyChoiceUI;
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.FindArtistNameEasyUI;
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.FindArtistNameHardUI;
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.FindTrackNameHardUI;
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.GameModeChoiceUI;
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.FindTrackNameEasyUI;
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.LoginUI;
-import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.PlaylistChoiceUI;
+import com.example.marco.myfirstspotifyapp.com.example.marco.myfirstspotifyapp.myactivity.*;
+
 
 public class ActivityFactory {
 
-    private ActivityType difficulty;
-    private ActivityType mode;
+
+    private static ActivityFactory instance;
+    public ActivityType difficulty;
+    public ActivityType mode;
+
+    private ActivityFactory(){}
+
+    public static ActivityFactory init() {
+
+        if( instance == null) {
+            instance = new ActivityFactory();
+        }
+        return instance;
+    }
+
+    public static ActivityFactory getInstance() {
+        return instance;
+    }
+
 
     public  AbstractActivityUI create(ActivityType onSwitch, Activity activity, MySpotify mySpotify, ViewGroup rootContainer){
 
         switch(onSwitch){
             case LoginUI:               return new LoginUI(activity, mySpotify, rootContainer);
             case GameModeChoiceUI:      return new GameModeChoiceUI(activity, mySpotify, rootContainer);
+            case ShowBestScore:         return new ShowBestScoreUI(activity, mySpotify, rootContainer);
             case findTrackName:
                 mode = ActivityType.findTrackName;
                 return new DifficultyChoiceUI(activity, mySpotify, rootContainer);

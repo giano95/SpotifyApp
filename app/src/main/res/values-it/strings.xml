@@ -7,6 +7,10 @@
     <string name="login_button">Login</string>
     <string name="logout_button">Logout</string>
     <string name="play_button">Gioca</string>
+    <string name="spotify_game_textview">Spotify\nGame</string>
+
+    <!--string values of the ShowBestScore activity-->
+    <string name="show_best_score_textview">I migliori punteggi</string>
 
     <!--string values of the GameModeChoice activity-->
     <string name="game_mode_choice_textview">Scegli la modalità</string>

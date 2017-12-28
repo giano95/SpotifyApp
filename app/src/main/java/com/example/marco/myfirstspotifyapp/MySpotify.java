@@ -43,7 +43,8 @@ public final class MySpotify{
     private Metadata mMetadata;
     private PlaybackState mCurrentPlaybackState;
     private BroadcastReceiver mNetworkStateReceiver;
-    private Playlist mPlaylist;
+    private TrackPlaylist mTrackPlaylist;
+    private ArtistPlaylist mArtistPlaylist;
 
 
 // CONSTRUCTOR
@@ -256,16 +257,23 @@ public final class MySpotify{
 
 
 // USEFUL METHODS
-    public void setPlaylist(String playlistUri, int playlistLength){
-        mPlaylist = new Playlist(playlistUri, playlistLength);
+
+    public void setTrackPlaylist(String playlistUri, int playlistLength){
+        mTrackPlaylist = new TrackPlaylist(playlistUri, playlistLength);
     }
 
-    public void setPlaylist(Playlist playlist){
-        mPlaylist = playlist;
+    public void setArtistPlaylist(Genre genre){
+        mArtistPlaylist = new ArtistPlaylist(genre);
+        mTrackPlaylist = mArtistPlaylist.getRandomArtist();
+    }
+
+    public void nextArtist() {
+        mTrackPlaylist = mArtistPlaylist.getRandomArtist();
     }
 
     public void playRandomSong(){
-        mPlayer.playUri(mOperationCallback, mPlaylist.getPlaylistUri(), mPlaylist.getRandomTrack(), 0);
+
+        mPlayer.playUri(mOperationCallback, mTrackPlaylist.getPlaylistUri(), mTrackPlaylist.getRandomTrack(), 0);
     }
 
     public void skipToNext(){
